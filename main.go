@@ -46,6 +46,7 @@ func main() {
 		ErrorHandler: globalErrorHandler,
 	}
 	app := fiber.New(config)
+	app.Static("/", "./public") // Serving static files from this folder
 
 	// Middleware
 	app.Use(logger.New(logger.Config{

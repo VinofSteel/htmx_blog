@@ -1,0 +1,38 @@
+services:
+  db:
+    container_name: htmx_blog_db
+    image: postgres:16.3-alpine
+    environment:
+      POSTGRES_USER: ${PGUSER}
+      POSTGRES_PASSWORD: ${PGPASSWORD}
+      POSTGRES_DB: ${PGDATABASE}
+    ports:
+      - "${PGPORT}:${PGPORT}"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - htmx_blog_network
+
+  api:
+    build: .
+    container_name: htmx_blog_api
+    environment:
+      PGHOST: db
+      PGPORT: ${PGPORT}
+      PGUSER: ${PGUSER}
+      PGPASSWORD: ${PGPASSWORD}
+      PGDATABASE: ${PGDATABASE}
+      PORT: ${PORT}
+      SECRET_KEY: ${SECRET_KEY}
+    ports:
+      - "6969:6969"
+    depends_on:
+      - db
+    networks:
+      - htmx_blog_network
+
+volumes:
+  db_data:
+
+networks:
+  htmx_blog_network:

@@ -3,6 +3,7 @@
 
 # Environment 
 .env
+vendor
 
 # Executables
 tmp
