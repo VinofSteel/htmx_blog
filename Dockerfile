@@ -1,5 +1,10 @@
-# Use the official Golang image as the base image
 FROM golang:1.22.3-alpine
+
+# Installing dependencies
+RUN apk update && apk add --no-cache make
+RUN go install github.com/pressly/goose/v3/cmd/goose@latest
+RUN go install github.com/a-h/templ/cmd/templ@latest
+RUN go install github.com/air-verse/air@latest
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -12,10 +17,10 @@ RUN go mod download
 COPY . .
 
 # Build the application
-RUN go build -mod=vendor -o htmx_blog
+# RUN make build
 
 # Expose the port that the application will run on
 EXPOSE ${PORT}
 
 # Set the entrypoint command to run the application
-CMD ["./htmx_blog"]
+CMD ["make"]

@@ -25,11 +25,13 @@ services:
       PORT: ${PORT}
       SECRET_KEY: ${SECRET_KEY}
     ports:
-      - "6969:6969"
+      - "${PORT}:${PORT}"
     depends_on:
       - db
     networks:
       - htmx_blog_network
+    volumes:
+    - .:/app
 
 volumes:
   db_data:
