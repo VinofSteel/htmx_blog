@@ -12,7 +12,7 @@ import (
 	"github.com/vinofsteel/htmx_blog/handlers"
 )
 
-func main() {	
+func main() {
 	// Initializers
 	// Initializing environment
 	err := godotenv.Load()

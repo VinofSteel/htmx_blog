@@ -7,7 +7,7 @@ import (
 
 func (cfg *Config) RenderHello(c *fiber.Ctx) error {
 	name := c.Params("name")
-	
+
 	if name == "" {
 		name = "World"
 	}
