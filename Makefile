@@ -1,5 +1,11 @@
 .DEFAULT_GOAL := run
 
+# Templ
+templ_gen:
+	templ generate
+.PHONY:templ_gen
+
+# API
 fmt:
 	gofmt -w .
 .PHONY:fmt
@@ -12,6 +18,6 @@ build: fmt
 	go build -mod=vendor -o htmx_blog
 .PHONY: build
 
-run: fmt
+run: fmt templ_gen
 	air
 .PHONY:run
