@@ -23,4 +23,4 @@ COPY . .
 EXPOSE ${PORT}
 
 # Set the entrypoint command to run the application
-CMD ["make"]
+CMD ["sh", "-c", "if [ \"$ENV\" = \"production\" ]; then make build && ./htmx_blog; else make run; fi"]

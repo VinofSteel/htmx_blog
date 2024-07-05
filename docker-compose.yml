@@ -24,6 +24,7 @@ services:
       PGDATABASE: ${PGDATABASE}
       PORT: ${PORT}
       SECRET_KEY: ${SECRET_KEY}
+      ENV: ${ENV}
     ports:
       - "${PORT}:${PORT}"
     depends_on:
