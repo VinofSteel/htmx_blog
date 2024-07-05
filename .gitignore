@@ -1,2 +1,10 @@
+# Config and editor files
 .vscode
+
+# Environment 
 .env
+
+# Executables
+tmp
+htmx_blog
+htmx_blog.exe
