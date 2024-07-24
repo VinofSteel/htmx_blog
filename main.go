@@ -57,7 +57,7 @@ func main() {
 	app.Get("/:name?", handlersConfig.RenderHello)
 
 	// Fallback 404 middleware, catches any route that does not have a handler
-	app.Use(handlersConfig.Middleware_NotFound)
+	app.Use(handlersConfig.MiddlewareNotFound)
 
 	log.Fatal(app.Listen(fmt.Sprintf(":%s", os.Getenv("PORT"))))
 }

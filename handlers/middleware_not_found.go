@@ -6,6 +6,6 @@ import (
 	"github.com/vinofsteel/htmx_blog/views"
 )
 
-func (cfg *Config) Middleware_NotFound(c *fiber.Ctx) error {
+func (cfg *Config) MiddlewareNotFound(c *fiber.Ctx) error {
 	return cfg.render(c, views.NotFound(), templ.WithStatus(fiber.StatusNotFound))
 }

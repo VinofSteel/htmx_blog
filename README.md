@@ -7,7 +7,7 @@ Nessa aplicação, é possível fazer todo o processo de autentiação esperado 
 ## Tecnologias utilizadas:
 - [Go](https://go.dev/) v1.22.3
   - [Fiber](https://gofiber.io/) v2.52.5
-  - [Air](https://github.com/air-verse/air)
+  - [Air](https://github.com/air-verse/air) v1.52.3
   - [sqlc](https://docs.sqlc.dev/en/latest/) v1.26.0
   - [Goose](https://github.com/pressly/goose) v3.21.1
   - [Validator](https://pkg.go.dev/github.com/go-playground/validator/v10) v10.22.0
