@@ -7,5 +7,7 @@ import (
 )
 
 func (cfg *Config) MiddlewareNotFound(c *fiber.Ctx) error {
-	return cfg.render(c, views.NotFound(), templ.WithStatus(fiber.StatusNotFound))
+	slug := c.OriginalURL()[1:]
+
+	return cfg.render(c, views.NotFound(slug), templ.WithStatus(fiber.StatusNotFound))
 }

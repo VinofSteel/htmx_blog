@@ -7,36 +7,10 @@ import (
 	"time"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/logger"
-	"github.com/joho/godotenv"
-	"github.com/vinofsteel/htmx_blog/handlers"
+	"github.com/vinofsteel/htmx_blog/server"
 )
 
 func main() {
-	// Initializers
-	// Initializing environment
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// Initializng our db
-	// db := dbInitializer()
-
-	// Initializing the validator
-	// validate := validator.New(validator.WithRequiredStructEnabled())
-
-	// validator := validation.New(validate)
-	// dbQueries := database.New(db)
-
-	// handlersConfig := handlers.Config{
-	// 	DB:        dbQueries,
-	// 	Validator: validator,
-	// }
-
-	// Handlers config
-	handlersConfig := handlers.Config{}
-
 	// New fiber app
 	config := fiber.Config{
 		AppName:      "HTMX Blog",
@@ -45,21 +19,9 @@ func main() {
 		IdleTimeout:  120 * time.Second,
 		ErrorHandler: globalErrorHandler,
 	}
-	app := fiber.New(config)
-	app.Static("/", "./public") // Serving static files from this folder
-
-	// Middleware
-	app.Use(logger.New(logger.Config{
-		Format: "IP+PORT: ${ip}:${port} | METHOD: ${method} | STATUS: ${status} | PATH: ${path}\n",
-	}))
-
-	// Routes
-	app.Get("/:name?", handlersConfig.RenderHello)
-
-	// Fallback 404 middleware, catches any route that does not have a handler
-	app.Use(handlersConfig.MiddlewareNotFound)
-
-	log.Fatal(app.Listen(fmt.Sprintf(":%s", os.Getenv("PORT"))))
+	
+	server := server.New(config)
+	log.Fatal(server.Listen(fmt.Sprintf(":%s", os.Getenv("PORT"))))
 }
 
 func globalErrorHandler(c *fiber.Ctx, err error) error {
