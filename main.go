@@ -19,7 +19,7 @@ func main() {
 		IdleTimeout:  120 * time.Second,
 		ErrorHandler: globalErrorHandler,
 	}
-	
+
 	server := server.New(config)
 	log.Fatal(server.Listen(fmt.Sprintf(":%s", os.Getenv("PORT"))))
 }
