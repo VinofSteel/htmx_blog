@@ -22,11 +22,11 @@ services:
       PGUSER: ${PGUSER}
       PGPASSWORD: ${PGPASSWORD}
       PGDATABASE: ${PGDATABASE}
-      PORT: 3456
+      PORT: ${PORT}
       SECRET_KEY: ${SECRET_KEY}
       ENV: ${ENV}
     ports:
-      - "3456:3456"
+      - "${PORT}:${PORT}"
     depends_on:
       - db
     networks:

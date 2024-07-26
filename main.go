@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"log"
+	"os"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -19,7 +21,7 @@ func main() {
 	}
 
 	server := server.New(config)
-	log.Fatal(server.Listen(":3456"))
+	log.Fatal(server.Listen(fmt.Sprintf(":%s", os.Getenv("PORT"))))
 }
 
 func globalErrorHandler(c *fiber.Ctx, err error) error {
