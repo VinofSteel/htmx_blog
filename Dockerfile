@@ -1,7 +1,7 @@
 FROM golang:1.22.5-alpine
 
 # Installing dependencies
-RUN apk update && apk add --no-cache make
+RUN apk update && apk add --no-cache make postgresql-client
 RUN go install github.com/pressly/goose/v3/cmd/goose@latest
 RUN go install github.com/a-h/templ/cmd/templ@latest
 RUN go install github.com/air-verse/air@latest
@@ -15,12 +15,12 @@ RUN go mod download
 
 # Copy the application source code
 COPY . .
-
-# Build the application
-# RUN make build
+# Copy the start script
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
 
 # Expose the port that the application will run on
 EXPOSE ${PORT}
 
 # Set the entrypoint command to run the application
-CMD ["sh", "-c", "if [ \"$ENV\" = \"production\" ]; then make build && ./htmx_blog; else make run; fi"]
+CMD ["/start.sh"]
