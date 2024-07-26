@@ -6,6 +6,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/joho/godotenv"
 	"github.com/vinofsteel/htmx_blog/handlers"
+	"github.com/vinofsteel/htmx_blog/internal/database"
 )
 
 func routerInitializer(app *fiber.App) {
@@ -16,7 +17,12 @@ func routerInitializer(app *fiber.App) {
 	}
 
 	// Initializing db
-	handlersConfig := handlers.Config{}
+	db := dbInitializer()
+	queries := database.New(db)
+
+	handlersConfig := handlers.Config{
+		DB: queries,
+	}
 
 	// Routes
 	app.Get("/:name?", handlersConfig.RenderHello)

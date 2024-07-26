@@ -4,10 +4,11 @@ import (
 	"github.com/a-h/templ"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/adaptor"
+	"github.com/vinofsteel/htmx_blog/internal/database"
 )
 
 type Config struct {
-	// DB        *database.Queries
+	DB *database.Queries
 	// Validator *validation.Validator
 }
 
