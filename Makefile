@@ -5,7 +5,7 @@ ifneq (,$(wildcard ./.env))
     export
 endif
 
-PG_CONN_STRING=postgres://$(PGUSER):$(PGPASSWORD)@$(PGHOST):$(PGPORT)/$(PGDATABASE)?sslmode=disable
+PG_CONN_STRING=postgresql://$(PGUSER):$(PGPASSWORD)@$(PGHOST):$(PGPORT)/$(PGDATABASE)?sslmode=disable
 
 # Templ
 templ_gen:
