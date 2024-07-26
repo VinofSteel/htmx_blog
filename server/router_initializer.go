@@ -2,6 +2,7 @@ package server
 
 import (
 	"log"
+	"os"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/joho/godotenv"
@@ -11,9 +12,11 @@ import (
 
 func routerInitializer(app *fiber.App) {
 	// Initializing environment
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal(err)
+	if os.Getenv("ENV") != "production" {
+		err := godotenv.Load()
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 
 	// Initializing db

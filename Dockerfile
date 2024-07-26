@@ -20,7 +20,7 @@ COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
 # Expose the port that the application will run on
-EXPOSE "3456"
+EXPOSE 3456
 
 # Set the entrypoint command to run the application
 CMD ["/start.sh"]
