@@ -21,7 +21,7 @@ vendor:
 	go mod vendor
 .PHONY: vendor
 
-build: fmt templ_gen
+build: vendor fmt templ_gen
 	go build -mod=vendor -o htmx_blog
 .PHONY: build
 
