@@ -32,3 +32,9 @@ func (cfg *Config) render(c *fiber.Ctx, component templ.Component, options ...fu
 	}
 	return adaptor.HTTPHandler(componentHandler)(c)
 }
+
+func New(queries *database.Queries) Config {
+	return Config{
+		DB: queries,
+	}
+}

@@ -23,13 +23,12 @@ func routerInitializer(app *fiber.App) {
 	db := dbInitializer()
 	queries := database.New(db)
 
-	handlersConfig := handlers.Config{
-		DB: queries,
-	}
+	// Initializing handlers
+	handler := handlers.New(queries)
 
 	// Routes
-	app.Get("/:name?", handlersConfig.RenderHello)
+	app.Get("/:name?", handler.RenderHello)
 
 	// Fallback 404 middleware, catches any route that does not have a handler
-	app.Use(handlersConfig.MiddlewareNotFound)
+	app.Use(handler.MiddlewareNotFound)
 }

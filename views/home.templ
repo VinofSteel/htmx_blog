@@ -1,5 +1,9 @@
 package views
 
+import "github.com/vinofsteel/htmx_blog/views/components"
+
 templ Home(name string) {
-	<h1>Hello { name }</h1>
+	@components.BaseTemplate() {
+		<h1>Hello { name }</h1>
+	}
 }

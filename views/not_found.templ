@@ -1,5 +1,9 @@
 package views
 
+import "github.com/vinofsteel/htmx_blog/views/components"
+
 templ NotFound(slug string) {
-	<h1>{slug}</h1>
+	@components.BaseTemplate(){
+		<h1>{slug}</h1>
+	}
 }

@@ -29,12 +29,12 @@ if [ "$ENV" != "production" ]; then
   fi
 fi
 
-# Run migrations
-echo "Running migrations to $PGDATABASE db..."
-goose -dir sql/schema postgres "$PG_CONN_STRING" up
-
 # Start the application
 if [ "$ENV" = "production" ]; then
+  # We only run migrations automatically on prod, so that we can write migrations without them running on every reload in development
+  echo "Running migrations to $PGDATABASE db..."
+  goose -dir sql/schema postgres "$PG_CONN_STRING" up
+
   make build && ./htmx_blog
 else
   make run

@@ -5,7 +5,14 @@ ifneq (,$(wildcard ./.env))
     export
 endif
 
-PG_CONN_STRING=postgresql://$(PGUSER):$(PGPASSWORD)@$(PGHOST):$(PGPORT)/$(PGDATABASE)?sslmode=disable
+# This here is done to allow goose to run migrations, since it won't work using db as the value in a development environment
+ifeq ($(ENV),production)
+    PGHOST_OVERRIDE=$(PGHOST)
+else
+    PGHOST_OVERRIDE=localhost
+endif
+
+PG_CONN_STRING=postgresql://$(PGUSER):$(PGPASSWORD)@$(PGHOST_OVERRIDE):$(PGPORT)/$(PGDATABASE)?sslmode=disable
 
 # Templ
 templ_gen:
