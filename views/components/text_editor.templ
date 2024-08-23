@@ -1,16 +1,22 @@
 package components
 
 templ TextEditor() {
-    <div id="editor">
-        <p>Hello World!</p>
-        <p>Some initial <strong>bold</strong> text</p>
-        <p><br /></p>
+    <div class="editor-container">
+        <form id="editor-form" method="post">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input id="title" name="title" type="text">
+            </div>
+            <div class="form-group">
+                <label for="author">Author</label>
+                <input id="author" name="author" type="text">
+            </div>
+            <div class="form-group">
+                <label>Article</label>
+                <div id="editor"></div>
+            </div>
+            <button type="submit">Submit Form</button>
+            <button type="button" id="resetForm">Reset</button>
+        </form>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
-    <script type="text/javascript">
-        const quill = new Quill('#editor', {
-            theme: 'snow'
-        });
-    </script>   
 }

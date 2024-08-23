@@ -19,15 +19,12 @@ templ NotFound(slug string) {
         document.getElementById('toggle-editor').addEventListener('click', (event) => {
             event.preventDefault();
 
-            const editor = document.getElementById('editor');
-            const toolbar = document.querySelector('.ql-toolbar');
+            const editor = document.querySelector('.editor-container');
 
             if (editor.style.display === 'none' || !editor.style.display) {
-                editor.style.display = 'block';
-                toolbar.style.display = 'block';
+                editor.style.display = 'flex';
             } else {
                 editor.style.display = 'none';
-                toolbar.style.display = 'none';
             }
         });
     </script>

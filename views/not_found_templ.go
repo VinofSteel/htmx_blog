@@ -54,7 +54,7 @@ func NotFound(slug string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<script>\n        document.getElementById('toggle-editor').addEventListener('click', (event) => {\n            event.preventDefault();\n\n            const editor = document.getElementById('editor');\n            const toolbar = document.querySelector('.ql-toolbar');\n\n            if (editor.style.display === 'none' || !editor.style.display) {\n                editor.style.display = 'block';\n                toolbar.style.display = 'block';\n            } else {\n                editor.style.display = 'none';\n                toolbar.style.display = 'none';\n            }\n        });\n    </script>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<script>\n        document.getElementById('toggle-editor').addEventListener('click', (event) => {\n            event.preventDefault();\n\n            const editor = document.querySelector('.editor-container');\n\n            if (editor.style.display === 'none' || !editor.style.display) {\n                editor.style.display = 'flex';\n            } else {\n                editor.style.display = 'none';\n            }\n        });\n    </script>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

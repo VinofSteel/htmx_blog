@@ -26,7 +26,7 @@ func TextEditor() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"editor\"><p>Hello World!</p><p>Some initial <strong>bold</strong> text</p><p><br></p></div><script src=\"https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js\"></script><script type=\"text/javascript\">\n        const quill = new Quill('#editor', {\n            theme: 'snow'\n        });\n    </script>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"editor-container\"><form id=\"editor-form\" method=\"post\"><div class=\"form-group\"><label for=\"title\">Title</label> <input id=\"title\" name=\"title\" type=\"text\"></div><div class=\"form-group\"><label for=\"author\">Author</label> <input id=\"author\" name=\"author\" type=\"text\"></div><div class=\"form-group\"><label>Article</label><div id=\"editor\"></div></div><button type=\"submit\">Submit Form</button> <button type=\"button\" id=\"resetForm\">Reset</button></form></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
