@@ -1,0 +1,16 @@
+package components
+
+templ TextEditor() {
+    <div id="editor">
+        <p>Hello World!</p>
+        <p>Some initial <strong>bold</strong> text</p>
+        <p><br /></p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+    <script type="text/javascript">
+        const quill = new Quill('#editor', {
+            theme: 'snow'
+        });
+    </script>   
+}

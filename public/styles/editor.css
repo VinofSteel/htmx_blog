@@ -1,0 +1,24 @@
+.ql-toolbar {
+    display: none;
+    margin: 0 auto;
+
+    width: 70%;
+}
+
+#editor {
+    display: none;
+    margin: 0 auto 30px auto;
+
+    width: 70%;
+    height: 300px;
+}
+
+@media (max-width: 768px) {
+    .ql-toolbar {
+        width: 100%;
+    }
+    
+    #editor {
+        width: 100%;
+    }
+}

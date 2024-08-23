@@ -40,26 +40,21 @@ func NotFound(slug string) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<h1>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section><h1>Page not found</h1><h3>Would you like to create a new one? <span id=\"toggle-editor\">Click here</span></h3></section>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			var templ_7745c5c3_Var3 string
-			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(slug)
-			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/not_found.templ`, Line: 7, Col: 11}
-			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h1>")
+			templ_7745c5c3_Err = components.TextEditor().Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			return templ_7745c5c3_Err
 		})
 		templ_7745c5c3_Err = components.BaseTemplate().Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<script>\n        document.getElementById('toggle-editor').addEventListener('click', (event) => {\n            event.preventDefault();\n\n            const editor = document.getElementById('editor');\n            const toolbar = document.querySelector('.ql-toolbar');\n\n            console.log(editor.style.display, \"EDITOR STYLE DISPLAY\")\n            console.log(editor.style, \"EDITOR STYLE\")\n\n            if (editor.style.display === 'none' || !editor.style.display) {\n                editor.style.display = 'block';\n                toolbar.style.display = 'block';\n            } else {\n                editor.style.display = 'none';\n                toolbar.style.display = 'none';\n            }\n        });\n    </script>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

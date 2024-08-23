@@ -2,9 +2,8 @@
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
+del, dfn, img, ins, kbd, q, s, samp,
+small, strike, sub, sup, tt, var, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
@@ -15,31 +14,36 @@ time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
     box-sizing: border-box;
 }
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+
 ol, ul {
 	list-style: none;
 }
+
 blockquote, q {
 	quotes: none;
 }
+
 blockquote:before, blockquote:after,
 q:before, q:after {
 	content: '';
 	content: none;
 }
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
 a {
     text-decoration: none;
 }
@@ -83,65 +87,4 @@ body {
     font-family: 'Inter', sans-serif;
     background-color: var(--color-primary);
     color: var(--color-text);
-}
-
-header {
-    width: 100vw;
-    height: 10vh;
-    background-color: var(--color-shade-4);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    z-index: 1;
-}
-
-header h1 {
-    width: fit-content;
-    margin-left: 1vw;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-shade-1);
-}
-
-header nav {
-    margin-right: 1vw;
-}
-
-header nav ul {
-    display: flex;
-    gap: 0.5rem;
-    font-size: 0.8rem;
-    font-weight: 700;
-}
-
-header nav ul li {
-    font-size: 0.7rem;
-}
-
-header nav ul li a {
-    color: var(--color-opposite);
-}
-
-@media all and (min-width:768px) {
-    header h1 {
-        margin-left: 3vw;
-        font-size: 2rem;
-        font-weight: 800;
-    }
-    
-    header nav {
-        margin-right: 3vw;
-    }
-
-    header nav ul {
-        gap: 1rem;
-        font-size: 1rem;
-    }
-    
-    header nav ul li {
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
-    }
 }
