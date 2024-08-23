@@ -1,6 +1,6 @@
 services:
   db:
-    container_name: htmx_blog_db
+    container_name: templ_blog_db
     image: postgres:16.3-alpine
     environment:
       POSTGRES_USER: ${PGUSER}
@@ -11,11 +11,11 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
     networks:
-      - htmx_blog_network
+      - templ_blog_network
 
   api:
     build: .
-    container_name: htmx_blog_api
+    container_name: templ_blog_api
     environment:
       PGHOST: db
       PGPORT: ${PGPORT}
@@ -30,7 +30,7 @@ services:
     depends_on:
       - db
     networks:
-      - htmx_blog_network
+      - templ_blog_network
     volumes:
     - .:/app
 
@@ -38,4 +38,4 @@ volumes:
   db_data:
 
 networks:
-  htmx_blog_network:
+  templ_blog_network:

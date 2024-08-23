@@ -1,5 +1,6 @@
 import Quill from "quill";
-import { API } from "./api.js";
+import { Requests } from "./requests";
+import { articleObject } from "./types";
 
 const quill = new Quill('#editor', {
     modules: {
@@ -39,27 +40,19 @@ const form = document.getElementById('editor-form');
 if (form) {
     async function submitArticleData(event: SubmitEvent) {
         event.preventDefault();
+        const requests = new Requests();
 
         const titleElement = document.getElementById("title") as HTMLInputElement | null;
         const authorElement = document.getElementById("author") as HTMLInputElement | null;
         const quillContent = quill.getContents().ops;
     
-        const articlePost = {
+        const articlePost: articleObject = {
             title: titleElement?.value || "",
             author: authorElement?.value || "",
             articleContent: quillContent
         };
     
-        let response;
-        try {
-            response = await API.post("/article", articlePost, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-        } catch (error) {
-            console.error(error);
-        }
+        const response = await requests.CreateNewArticle(articlePost);
     
         console.log(response, "RESPONSE");
     }
