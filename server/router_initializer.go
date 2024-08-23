@@ -27,7 +27,7 @@ func routerInitializer(app *fiber.App) {
 	handler := handlers.New(queries)
 
 	// Routes
-	// app.Get("/:name?", handler.RenderHello)
+	app.Get("/hello", handler.RenderHello)
 
 	// Fallback 404 middleware, catches any route that does not have a handler
 	app.Use(handler.MiddlewareNotFound)
