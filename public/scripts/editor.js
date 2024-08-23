@@ -1,3 +1,5 @@
+import { API } from "./api.js";
+
 const quill = new Quill('#editor', {
     modules: {
         toolbar: [
@@ -23,7 +25,7 @@ document.getElementById('resetForm').addEventListener('click', () => {
 });
 
 const form = document.getElementById('editor-form');
-form.addEventListener("submit", (event) => {
+form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const title = document.getElementById("title");
@@ -36,5 +38,16 @@ form.addEventListener("submit", (event) => {
         articleContent: quillContent
     };
 
-    console.log(articlePost, "ARTICLE POST")
+    let response;
+    try {
+        response = await API.post("/article", articlePost, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    } catch (error) {
+        console.error(error);
+    }
+
+    console.log(response, "RESPONSE");
 })
