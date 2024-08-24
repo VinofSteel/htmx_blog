@@ -8,7 +8,18 @@ import (
 	"time"
 
 	"github.com/google/uuid"
+	"github.com/sqlc-dev/pqtype"
 )
+
+type Article struct {
+	ID        uuid.UUID
+	Slug      string
+	Author    string
+	Content   pqtype.NullRawMessage
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	DeletedAt time.Time
+}
 
 type User struct {
 	ID        uuid.UUID

@@ -1,13 +1,68 @@
 package handlers
 
 import (
+	"database/sql"
+	"log"
+	"net/url"
+	"regexp"
+	"strings"
+
 	"github.com/a-h/templ"
 	"github.com/gofiber/fiber/v2"
+	"github.com/google/uuid"
 	"github.com/vinofsteel/templ_blog/views"
 )
 
 func (cfg *Config) MiddlewareNotFound(c *fiber.Ctx) error {
-	slug := c.OriginalURL()[1:]
+	urlSlug := c.OriginalURL()[1:]
+	sanitizedSlug := sanitizeSlug(urlSlug)
 
-	return cfg.render(c, views.NotFound(slug), templ.WithStatus(fiber.StatusNotFound))
+	if sanitizedSlug != urlSlug {
+		if sanitizedSlug == "" {
+			return c.Redirect("/", fiber.StatusMovedPermanently)
+		}
+
+		return c.Redirect("/"+sanitizedSlug, fiber.StatusMovedPermanently)
+	}
+
+	existingArticle, err := cfg.DB.ListArticleBySlug(c.Context(), sanitizedSlug)
+	if err != nil && err != sql.ErrNoRows {
+		log.Println("Error trying to get an article by slug: ", err)
+		return cfg.render(c, views.NotFound(sanitizedSlug), templ.WithStatus(fiber.StatusNotFound))
+	}
+
+	if existingArticle.ID == uuid.Nil {
+		log.Printf("Article with slug %s not found, rendering not found view...\n", sanitizedSlug)
+		return cfg.render(c, views.NotFound(sanitizedSlug), templ.WithStatus(fiber.StatusNotFound))
+	}
+
+	return cfg.render(c, views.NotFound(sanitizedSlug), templ.WithStatus(fiber.StatusNotFound))
+}
+
+func sanitizeSlug(slug string) string {
+	// URL-decode the slug first
+	decodedSlug, err := url.QueryUnescape(slug)
+	if err != nil {
+		log.Println("Error decoding URL:", err)
+		decodedSlug = slug
+	}
+
+	// Convert to lowercase
+	decodedSlug = strings.ToLower(decodedSlug)
+
+	// Replace spaces with hyphens
+	decodedSlug = strings.ReplaceAll(decodedSlug, " ", "-")
+
+	// Remove all characters except lowercase letters, numbers, and hyphens
+	reg := regexp.MustCompile(`[^a-z0-9-]+`)
+	sanitized := reg.ReplaceAllString(decodedSlug, "")
+
+	// Replace multiple consecutive hyphens with a single hyphen
+	reg = regexp.MustCompile(`-+`)
+	sanitized = reg.ReplaceAllString(sanitized, "-")
+
+	// Trim hyphens from start and end
+	sanitized = strings.Trim(sanitized, "-")
+
+	return sanitized
 }

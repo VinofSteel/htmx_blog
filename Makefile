@@ -36,6 +36,14 @@ run: fmt templ_gen
 	air
 .PHONY:run
 
+test: fmt
+	go test ./... -count=1
+.PHONY: test
+
+sqlc-gen: fmt 
+	sqlc generate
+.PHONY:sqlc
+
 m-up:
 	goose -dir sql/schema postgres "$(PG_CONN_STRING)" up
 .PHONY: m-up
