@@ -18,7 +18,7 @@ export class Requests {
     public async CreateNewArticle(article: articleObject) {
         let response;
         try {
-            response = await this.LocalAPI.post("/article", article);
+            response = await this.LocalAPI.post("/articles", article);
         } catch (error) {
             console.error(error);
         }

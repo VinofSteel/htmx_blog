@@ -7,5 +7,6 @@ export type axiosHeaders = {
 export type articleObject = {
     title: string;
     author: string;
-    articleContent: Op[];
+    slug: string;
+    article_content: Op[];
 };

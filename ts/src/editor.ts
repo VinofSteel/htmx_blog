@@ -45,11 +45,12 @@ if (form) {
         const titleElement = document.getElementById("title") as HTMLInputElement | null;
         const authorElement = document.getElementById("author") as HTMLInputElement | null;
         const quillContent = quill.getContents().ops;
-    
+
         const articlePost: articleObject = {
             title: titleElement?.value || "",
             author: authorElement?.value || "",
-            articleContent: quillContent
+            slug: location.pathname.split('/').slice(1)[0],
+            article_content: quillContent
         };
     
         const response = await requests.CreateNewArticle(articlePost);
