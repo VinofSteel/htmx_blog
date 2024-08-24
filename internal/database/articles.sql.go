@@ -12,7 +12,7 @@ import (
 )
 
 const createArticle = `-- name: CreateArticle :one
-INSERT INTO articles (slug, author, content) VALUES ($1, $2, $3) RETURNING id, slug, author, content, created_at, updated_at, deleted_at
+INSERT INTO articles (slug, author, content) VALUES ($1, $2, $3) RETURNING id, slug, author, content, created_at, updated_at, deleted_at, title
 `
 
 type CreateArticleParams struct {
@@ -32,12 +32,13 @@ func (q *Queries) CreateArticle(ctx context.Context, arg CreateArticleParams) (A
 		&i.CreatedAt,
 		&i.UpdatedAt,
 		&i.DeletedAt,
+		&i.Title,
 	)
 	return i, err
 }
 
 const listAllArticles = `-- name: ListAllArticles :many
-SELECT id, slug, author, content, created_at, updated_at, deleted_at FROM articles ORDER BY $1 OFFSET $2 LIMIT $3
+SELECT id, slug, author, content, created_at, updated_at, deleted_at, title FROM articles ORDER BY $1 OFFSET $2 LIMIT $3
 `
 
 type ListAllArticlesParams struct {
@@ -63,6 +64,7 @@ func (q *Queries) ListAllArticles(ctx context.Context, arg ListAllArticlesParams
 			&i.CreatedAt,
 			&i.UpdatedAt,
 			&i.DeletedAt,
+			&i.Title,
 		); err != nil {
 			return nil, err
 		}
@@ -78,7 +80,7 @@ func (q *Queries) ListAllArticles(ctx context.Context, arg ListAllArticlesParams
 }
 
 const listArticleBySlug = `-- name: ListArticleBySlug :one
-SELECT id, slug, author, content, created_at, updated_at, deleted_at FROM articles WHERE slug LIKE $1
+SELECT id, slug, author, content, created_at, updated_at, deleted_at, title FROM articles WHERE slug LIKE $1
 `
 
 func (q *Queries) ListArticleBySlug(ctx context.Context, slug string) (Article, error) {
@@ -92,6 +94,7 @@ func (q *Queries) ListArticleBySlug(ctx context.Context, slug string) (Article, 
 		&i.CreatedAt,
 		&i.UpdatedAt,
 		&i.DeletedAt,
+		&i.Title,
 	)
 	return i, err
 }

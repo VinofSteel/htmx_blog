@@ -1,0 +1,8 @@
+package views
+
+import "github.com/vinofsteel/templ_blog/internal/database"
+
+templ ExistingArticle(article database.Article) {
+    <h1>{article.Title}</h1>
+    <h2>{article.Author}</h2>
+}

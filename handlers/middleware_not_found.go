@@ -27,7 +27,7 @@ func (cfg *Config) MiddlewareNotFound(c *fiber.Ctx) error {
 
 	existingArticle, err := cfg.DB.ListArticleBySlug(c.Context(), sanitizedSlug)
 	if err != nil && err != sql.ErrNoRows {
-		log.Println("Error trying to get an article by slug: ", err)
+		log.Println("Error trying to get an article by slug in MiddlewareNotFound: ", err)
 		return cfg.render(c, views.NotFound(sanitizedSlug), templ.WithStatus(fiber.StatusNotFound))
 	}
 
@@ -36,21 +36,18 @@ func (cfg *Config) MiddlewareNotFound(c *fiber.Ctx) error {
 		return cfg.render(c, views.NotFound(sanitizedSlug), templ.WithStatus(fiber.StatusNotFound))
 	}
 
-	return cfg.render(c, views.NotFound(sanitizedSlug), templ.WithStatus(fiber.StatusNotFound))
+	return cfg.render(c, views.ExistingArticle(existingArticle), templ.WithStatus(fiber.StatusNotFound))
 }
 
 func sanitizeSlug(slug string) string {
-	// URL-decode the slug first
+	// URL-decoding the slug to remove special characters like whitespace
 	decodedSlug, err := url.QueryUnescape(slug)
 	if err != nil {
 		log.Println("Error decoding URL:", err)
 		decodedSlug = slug
 	}
 
-	// Convert to lowercase
 	decodedSlug = strings.ToLower(decodedSlug)
-
-	// Replace spaces with hyphens
 	decodedSlug = strings.ReplaceAll(decodedSlug, " ", "-")
 
 	// Remove all characters except lowercase letters, numbers, and hyphens
