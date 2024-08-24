@@ -13,14 +13,14 @@ import (
 )
 
 type Article struct {
-	ID        uuid.UUID             `json:"id"`
-	CreatedAt time.Time             `json:"created_at"`
-	UpdatedAt time.Time             `json:"updated_at"`
-	DeletedAt sql.NullTime          `json:"deleted_at"`
-	Slug      string                `json:"slug"`
-	Title     string                `json:"title"`
-	Author    string                `json:"author"`
-	Content   json.RawMessage 		`json:"content"`
+	ID        uuid.UUID       `json:"id"`
+	CreatedAt time.Time       `json:"created_at"`
+	UpdatedAt time.Time       `json:"updated_at"`
+	DeletedAt sql.NullTime    `json:"deleted_at"`
+	Slug      string          `json:"slug"`
+	Title     string          `json:"title"`
+	Author    string          `json:"author"`
+	Content   json.RawMessage `json:"content"`
 }
 
 type Embed struct {
@@ -112,10 +112,10 @@ func databaseArticleToHandlerArticle(article database.Article) Article {
 	return Article{
 		ID:        article.ID,
 		CreatedAt: article.CreatedAt,
-		UpdatedAt:  article.UpdatedAt,
-		Slug: article.Slug,
-		Title: article.Title,
-		Author: article.Author,
-		Content: article.Content.RawMessage,
+		UpdatedAt: article.UpdatedAt,
+		Slug:      article.Slug,
+		Title:     article.Title,
+		Author:    article.Author,
+		Content:   article.Content.RawMessage,
 	}
 }
