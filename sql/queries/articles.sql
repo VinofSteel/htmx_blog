@@ -5,5 +5,5 @@ SELECT * FROM articles ORDER BY $1 OFFSET $2 LIMIT $3;
 SELECT * FROM articles WHERE slug LIKE $1;
 
 -- name: CreateArticle :one
-INSERT INTO articles (slug, author, content) VALUES ($1, $2, $3) RETURNING *;
+INSERT INTO articles (slug, title, author, content) VALUES ($1, $2, $3, $4) RETURNING *;
 

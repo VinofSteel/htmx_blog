@@ -12,17 +12,23 @@ import (
 )
 
 const createArticle = `-- name: CreateArticle :one
-INSERT INTO articles (slug, author, content) VALUES ($1, $2, $3) RETURNING id, slug, author, content, created_at, updated_at, deleted_at, title
+INSERT INTO articles (slug, title, author, content) VALUES ($1, $2, $3, $4) RETURNING id, slug, author, content, created_at, updated_at, deleted_at, title
 `
 
 type CreateArticleParams struct {
 	Slug    string
+	Title   string
 	Author  string
 	Content pqtype.NullRawMessage
 }
 
 func (q *Queries) CreateArticle(ctx context.Context, arg CreateArticleParams) (Article, error) {
-	row := q.db.QueryRowContext(ctx, createArticle, arg.Slug, arg.Author, arg.Content)
+	row := q.db.QueryRowContext(ctx, createArticle,
+		arg.Slug,
+		arg.Title,
+		arg.Author,
+		arg.Content,
+	)
 	var i Article
 	err := row.Scan(
 		&i.ID,
