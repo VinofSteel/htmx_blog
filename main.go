@@ -7,13 +7,13 @@ import (
 	"time"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/vinofsteel/htmx_blog/server"
+	"github.com/vinofsteel/templ_blog/server"
 )
 
 func main() {
 	// New fiber app
 	config := fiber.Config{
-		AppName:      "HTMX Blog",
+		AppName:      "Templ Blog",
 		ReadTimeout:  30 * time.Second,
 		WriteTimeout: 90 * time.Second,
 		IdleTimeout:  120 * time.Second,

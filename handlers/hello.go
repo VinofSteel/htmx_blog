@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/vinofsteel/htmx_blog/views"
+	"github.com/vinofsteel/templ_blog/views"
 )
 
 func (cfg *Config) RenderHello(c *fiber.Ctx) error {

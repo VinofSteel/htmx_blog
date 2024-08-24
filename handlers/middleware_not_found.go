@@ -3,7 +3,7 @@ package handlers
 import (
 	"github.com/a-h/templ"
 	"github.com/gofiber/fiber/v2"
-	"github.com/vinofsteel/htmx_blog/views"
+	"github.com/vinofsteel/templ_blog/views"
 )
 
 func (cfg *Config) MiddlewareNotFound(c *fiber.Ctx) error {

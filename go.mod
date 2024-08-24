@@ -1,4 +1,4 @@
-module github.com/vinofsteel/htmx_blog
+module github.com/vinofsteel/templ_blog
 
 go 1.22.3
 

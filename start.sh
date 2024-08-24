@@ -35,7 +35,7 @@ if [ "$ENV" = "production" ]; then
   echo "Running migrations to $PGDATABASE db..."
   goose -dir sql/schema postgres "$PG_CONN_STRING" up
 
-  make build && ./htmx_blog
+  make build && ./templ_blog
 else
   make run
 fi

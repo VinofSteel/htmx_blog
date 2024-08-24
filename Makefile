@@ -29,7 +29,7 @@ vendor:
 .PHONY: vendor
 
 build: vendor fmt templ_gen
-	go build -mod=vendor -o htmx_blog
+	go build -mod=vendor -o templ_blog
 .PHONY: build
 
 run: fmt templ_gen
