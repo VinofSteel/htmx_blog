@@ -28,6 +28,16 @@
     height: 300px;
 }
 
+#toggle-editor {
+    color: blue;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#toggle-editor:hover {
+    color: red;
+}
+
 @media (max-width: 768px) {
     .ql-toolbar {
         width: 100%;

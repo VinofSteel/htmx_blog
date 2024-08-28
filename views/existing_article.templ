@@ -8,6 +8,25 @@ templ ExistingArticle(article database.Article) {
         <section>
             <h1>{article.Title}</h1>
             <h2>{article.Author}</h2>
+            @components.ArticleDisplay()
+
+            <span id="toggle-editor">Edit article</span>
         </section>
+
+        @components.TextEditor()
     }
+
+    <script>
+        document.getElementById('toggle-editor').addEventListener('click', (event) => {
+            event.preventDefault();
+
+            const editor = document.querySelector('.editor-container');
+
+            if (editor.style.display === 'none' || !editor.style.display) {
+                editor.style.display = 'flex';
+            } else {
+                editor.style.display = 'none';
+            }
+        });
+    </script>
 }

@@ -97,16 +97,6 @@ main section h3 {
     font-size: 500;
 }
 
-main section h3 span {
-    color: blue;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-main section h3 span:hover {
-    color: red;
-}
-
 /* FOOTER */
 footer {
     display: flex;

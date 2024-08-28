@@ -10,3 +10,13 @@ export type articleObject = {
     slug: string;
     article_content: Op[];
 };
+
+export type articleDisplay = {
+    id: string,
+    slug: string,
+    title: string,
+    author: string,
+    content: Op[];
+    created_at: Date,
+    updated_at: Date,
+}

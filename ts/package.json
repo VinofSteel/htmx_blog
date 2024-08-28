@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "esbuild --bundle --minify --outdir=../public/scripts ./src/editor.ts"
+    "build": "esbuild --bundle --minify --outdir=../public/scripts ./src/main.ts"
   },
   "author": "VinofSteel",
   "license": "ISC",

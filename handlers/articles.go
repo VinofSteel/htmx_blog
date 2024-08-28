@@ -107,6 +107,32 @@ func (cfg *Config) ArticlesCreate(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusCreated).JSON(databaseArticleToHandlerArticle(newArticle))
 }
 
+func (cfg *Config) ArticlesListBySlug(c *fiber.Ctx) error {
+	c.Accepts("application/json")
+
+	slug := c.Params("slug")
+	article, err := cfg.DB.ListArticleBySlug(c.Context(), slug)
+	if err != nil {
+		if err != sql.ErrNoRows {
+			log.Println("Trying to get a non-existing article from db")
+			return &fiber.Error{
+				Code:    fiber.StatusNotFound,
+				Message: "article with this slug not found",
+			}
+		}
+
+		log.Println("Error trying to get an article by slug in ArticlesCreate: ", err)
+		return &fiber.Error{
+			Code:    fiber.StatusInternalServerError,
+			Message: "unknown error",
+		}
+	}
+
+	log.Println(article.Title, "ARTICLE TITLE")
+
+	return c.Status(fiber.StatusOK).JSON(databaseArticleToHandlerArticle(article))
+}
+
 // Utilities
 func databaseArticleToHandlerArticle(article database.Article) Article {
 	return Article{

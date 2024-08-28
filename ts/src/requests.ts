@@ -1,5 +1,5 @@
-import axios, { AxiosInstance } from "axios"
-import { axiosHeaders, articleObject } from "./types";
+import axios, { AxiosInstance, AxiosResponse } from "axios"
+import { axiosHeaders, articleObject, articleDisplay } from "./types";
 
 export class Requests {
     private baseURL: string = window.location.origin;
@@ -17,8 +17,21 @@ export class Requests {
 
     public async CreateNewArticle(article: articleObject) {
         let response;
+        
         try {
-            response = await this.LocalAPI.post("/articles", article);
+            response = await this.LocalAPI.post("/api/articles", article);
+        } catch (error) {
+            console.error(error);
+        }
+
+        return response;
+    }
+
+    public async ListArticleBySlug(slug: string): Promise<AxiosResponse> {
+        let response;
+
+        try {
+            response = await this.LocalAPI.get(`/api/articles/${slug}`);
         } catch (error) {
             console.error(error);
         }
