@@ -1,17 +1,17 @@
 import { Op } from "quill/core";
 
-export type axiosHeaders = {
+export type AxiosHeaders = {
     "Content-Type": string;
 };
 
-export type articleObject = {
+export type ArticleObject = {
     title: string;
     author: string;
     slug: string;
     article_content: Op[];
 };
 
-export type articleDisplay = {
+export type ArticleDisplay = {
     id: string,
     slug: string,
     title: string,

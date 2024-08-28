@@ -1,5 +1,5 @@
-import { articleDisplayObject } from "./articleDisplay";
-import { editorLogic } from "./editor";
+import { articleDisplayObject } from "./quill/articleDisplay";
+import { editorLogic } from "./quill/editor";
 
 // Where logic is distributed from
 editorLogic();

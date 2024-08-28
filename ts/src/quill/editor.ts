@@ -1,6 +1,6 @@
 import Quill from "quill";
-import { Requests } from "./requests";
-import { articleObject } from "./types";
+import { Requests } from "../requests";
+import { ArticleObject } from "../types/quillTypes";
 
 export function editorLogic() {
     // Verifying if there's an editor on the page to run the function
@@ -61,7 +61,7 @@ export function editorLogic() {
             const authorElement = document.getElementById("author") as HTMLInputElement | null;
             const quillContent = quill.getContents().ops;
     
-            const articlePost: articleObject = {
+            const articlePost: ArticleObject = {
                 title: titleElement?.value || "",
                 author: authorElement?.value || "",
                 slug: location.pathname.split('/').slice(1)[0],
