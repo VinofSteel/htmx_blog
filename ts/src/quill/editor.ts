@@ -23,6 +23,9 @@ export function editorLogic(slug: string) {
                 [{ 'color': [] }, { 'background': [] }], 
                 [{ 'font': [] }],
             ],
+            htmlEditButton: {
+                msg: "Edite o conteúdo em formato HTML",
+            }
         },
         placeholder: 'Write your article here...',
         theme: 'snow'
