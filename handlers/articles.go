@@ -128,7 +128,7 @@ func (cfg *Config) ArticlesListBySlug(c *fiber.Ctx) error {
 		}
 	}
 
-	log.Println(article.Title, "ARTICLE TITLE")
+	log.Println(databaseArticleToHandlerArticle(article), "ARTICLE")
 
 	return c.Status(fiber.StatusOK).JSON(databaseArticleToHandlerArticle(article))
 }

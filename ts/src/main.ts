@@ -1,7 +1,10 @@
 import { articleDisplayObject } from "./quill/articleDisplay";
 import { editorLogic } from "./quill/editor";
 
-// Where logic is distributed from
-editorLogic();
+// Global state
+const slug: string = location.pathname.split('/').slice(1)[0];
 
-articleDisplayObject();
+// Where logic is distributed from
+editorLogic(slug);
+
+articleDisplayObject(slug);

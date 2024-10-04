@@ -28,15 +28,15 @@ func (cfg *Config) MiddlewareNotFound(c *fiber.Ctx) error {
 	existingArticle, err := cfg.DB.ListArticleBySlug(c.Context(), sanitizedSlug)
 	if err != nil && err != sql.ErrNoRows {
 		log.Println("Error trying to get an article by slug in MiddlewareNotFound: ", err)
-		return cfg.render(c, views.NotFound(sanitizedSlug), templ.WithStatus(fiber.StatusNotFound))
+		return cfg.Render(c, views.NotFound(sanitizedSlug), templ.WithStatus(fiber.StatusNotFound))
 	}
 
 	if existingArticle.ID == uuid.Nil {
 		log.Printf("Article with slug %s not found, rendering not found view...\n", sanitizedSlug)
-		return cfg.render(c, views.NotFound(sanitizedSlug), templ.WithStatus(fiber.StatusNotFound))
+		return cfg.Render(c, views.NotFound(sanitizedSlug), templ.WithStatus(fiber.StatusNotFound))
 	}
 
-	return cfg.render(c, views.ExistingArticle(existingArticle), templ.WithStatus(fiber.StatusNotFound))
+	return cfg.Render(c, views.ExistingArticle(existingArticle), templ.WithStatus(fiber.StatusNotFound))
 }
 
 func sanitizeSlug(slug string) string {

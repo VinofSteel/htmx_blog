@@ -1,7 +1,7 @@
 import Quill from "quill";
 import { Requests } from "../requests";
 
-export function articleDisplayObject() {
+export function articleDisplayObject(slug: string) {
     const display = document.getElementById("article-display");
     if (!display) {
         return;
@@ -16,7 +16,7 @@ export function articleDisplayObject() {
 
     async function getArticleBySlug() {
         const requests = new Requests();
-        const data = await requests.ListArticleBySlug(location.pathname.split('/').slice(1)[0]);
+        const data = await requests.ListArticleBySlug(slug);
         
         quill.setContents(data?.content);
     }

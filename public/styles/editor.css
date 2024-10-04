@@ -3,7 +3,7 @@
 
     width: 70%;
 
-    margin: 0 auto;
+    margin: 30dvh auto 2dvh auto;
 
     justify-content: center;
     align-items: center;
@@ -29,6 +29,8 @@
 }
 
 #toggle-editor {
+    margin-bottom: 12dvh;
+
     color: blue;
     cursor: pointer;
     transition: 0.3s;

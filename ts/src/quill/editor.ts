@@ -2,7 +2,7 @@ import Quill from "quill";
 import { Requests } from "../requests";
 import { ArticleObject } from "../types/quillTypes";
 
-export function editorLogic() {
+export function editorLogic(slug: string) {
     // Verifying if there's an editor on the page to run the function
     const editor = document.getElementById("editor");
     if (!editor) {
@@ -64,7 +64,7 @@ export function editorLogic() {
             const articlePost: ArticleObject = {
                 title: titleElement?.value || "",
                 author: authorElement?.value || "",
-                slug: location.pathname.split('/').slice(1)[0],
+                slug: slug,
                 article_content: quillContent
             };
         

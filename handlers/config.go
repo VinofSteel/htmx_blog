@@ -25,7 +25,7 @@ type Config struct {
 // 	return TokenString(splitAuth[1]), nil
 // }
 
-func (cfg *Config) render(c *fiber.Ctx, component templ.Component, options ...func(*templ.ComponentHandler)) error {
+func (cfg *Config) Render(c *fiber.Ctx, component templ.Component, options ...func(*templ.ComponentHandler)) error {
 	componentHandler := templ.Handler(component)
 	for _, o := range options {
 		o(componentHandler)
