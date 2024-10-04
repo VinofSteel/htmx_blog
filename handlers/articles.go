@@ -6,10 +6,13 @@ import (
 	"log"
 	"time"
 
+	"github.com/a-h/templ"
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"
 	"github.com/sqlc-dev/pqtype"
 	"github.com/vinofsteel/templ_blog/internal/database"
+	"github.com/vinofsteel/templ_blog/internal/quill"
+	"github.com/vinofsteel/templ_blog/views"
 )
 
 type Article struct {
@@ -121,6 +124,27 @@ func (cfg *Config) ArticlesListBySlug(c *fiber.Ctx) error {
 			}
 		}
 
+		log.Println("Error trying to get an article by slug in ArticlesListBySlug: ", err)
+		return &fiber.Error{
+			Code:    fiber.StatusInternalServerError,
+			Message: "unknown error",
+		}
+	}
+
+	return c.Status(fiber.StatusOK).JSON(databaseArticleToHandlerArticle(article))
+}
+
+func (cfg *Config) ArticlesRenderServerSide(c *fiber.Ctx) error {
+	article, err := cfg.DB.ListArticleBySlug(c.Context(), "server")
+	if err != nil {
+		if err != sql.ErrNoRows {
+			log.Println("Trying to get a non-existing article from db")
+			return &fiber.Error{
+				Code:    fiber.StatusNotFound,
+				Message: "article with this slug not found",
+			}
+		}
+
 		log.Println("Error trying to get an article by slug in ArticlesCreate: ", err)
 		return &fiber.Error{
 			Code:    fiber.StatusInternalServerError,
@@ -128,9 +152,16 @@ func (cfg *Config) ArticlesListBySlug(c *fiber.Ctx) error {
 		}
 	}
 
-	log.Println(databaseArticleToHandlerArticle(article), "ARTICLE")
+	html, err := quill.Render(article.Content.RawMessage)
+	if err != nil {
+		log.Println("Error trying to transform delta to HTML in ArticlesRenderServerSide: ", err)
+		return &fiber.Error{
+			Code:    fiber.StatusInternalServerError,
+			Message: "unknown error",
+		}
+	}
 
-	return c.Status(fiber.StatusOK).JSON(databaseArticleToHandlerArticle(article))
+	return cfg.Render(c, views.ExistingArticle(article, string(html)), templ.WithStatus(fiber.StatusNotFound))
 }
 
 // Utilities

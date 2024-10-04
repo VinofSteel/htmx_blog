@@ -3,12 +3,17 @@ package views
 import "github.com/vinofsteel/templ_blog/internal/database"
 import "github.com/vinofsteel/templ_blog/views/components"
 
-templ ExistingArticle(article database.Article) {
+templ ExistingArticle(article database.Article, content string) {
     @components.BaseTemplate() {
         <section>
             <h1>{article.Title}</h1>
             <h2>{article.Author}</h2>
-            @components.ArticleDisplay()
+
+            if article.Title == "server" {
+                @components.ServerArticleDisplay(content)
+            } else {
+                @components.ArticleDisplay()
+            }
 
             <span id="toggle-editor">Edit article</span>
         </section>

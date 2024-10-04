@@ -36,7 +36,7 @@ func (cfg *Config) MiddlewareNotFound(c *fiber.Ctx) error {
 		return cfg.Render(c, views.NotFound(sanitizedSlug), templ.WithStatus(fiber.StatusNotFound))
 	}
 
-	return cfg.Render(c, views.ExistingArticle(existingArticle), templ.WithStatus(fiber.StatusNotFound))
+	return cfg.Render(c, views.ExistingArticle(existingArticle, ""), templ.WithStatus(fiber.StatusNotFound))
 }
 
 func sanitizeSlug(slug string) string {

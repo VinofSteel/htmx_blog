@@ -1,0 +1,9 @@
+package components
+
+templ ServerArticleDisplay(content string) {
+    <div class="article-display-container">
+        <div id="display" class="ql-container ql-disabled">
+            @templ.Raw(content)
+        </div>
+    </div>
+}
