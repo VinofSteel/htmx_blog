@@ -24,6 +24,12 @@
     width: 20%;
 }
 
+.ql-css-editor::before {
+    content: 'CSS';
+    font-size: 12px;
+    font-weight: bold;
+}
+
 #editor {
     height: 300px;
 }
