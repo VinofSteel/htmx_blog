@@ -1,4 +1,4 @@
-FROM golang:1.22.5-alpine
+FROM golang:1.23.2-alpine
 
 # Install dependencies for Go and TypeScript
 RUN apk update && apk add --no-cache \
