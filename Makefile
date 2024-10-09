@@ -28,11 +28,11 @@ vendor:
 	go mod vendor
 .PHONY: vendor
 
-build: vendor fmt templ_gen
+build: vendor fmt
 	go build -mod=vendor -o templ_blog
 .PHONY: build
 
-run: fmt templ_gen
+run: fmt
 	air
 .PHONY:run
 
