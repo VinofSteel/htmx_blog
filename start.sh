@@ -1,5 +1,12 @@
 #!/bin/sh
 
+# Install tooling necessary for everything
+if [ "$ENV" = "production" ]; then
+  go install github.com/pressly/goose/v3/cmd/goose@latest
+elif [ "$ENV" = "development" ]; then
+  go install github.com/air-verse/air@latest
+fi
+
 # Wait for the database to be ready
 MAX_TRIES=30
 TRIES=0

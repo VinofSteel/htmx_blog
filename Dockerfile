@@ -7,10 +7,6 @@ RUN apk update && apk add --no-cache \
     nodejs \
     npm
 
-# Install Go tools
-RUN go install github.com/pressly/goose/v3/cmd/goose@latest
-RUN go install github.com/air-verse/air@latest
-
 # Set the working directory inside the container
 WORKDIR /app
 
