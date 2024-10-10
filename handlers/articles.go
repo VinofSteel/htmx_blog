@@ -135,14 +135,11 @@ func (cfg *Config) ArticlesListBySlug(c *fiber.Ctx) error {
 }
 
 func (cfg *Config) ArticlesRenderServerSide(c *fiber.Ctx) error {
-	article, err := cfg.DB.ListArticleBySlug(c.Context(), "server")
+	article, err := cfg.DB.ListArticleBySlug(c.Context(), "server-1")
 	if err != nil {
-		if err != sql.ErrNoRows {
-			log.Println("Trying to get a non-existing article from db")
-			return &fiber.Error{
-				Code:    fiber.StatusNotFound,
-				Message: "article with this slug not found",
-			}
+		if err == sql.ErrNoRows {
+			log.Println("Trying to get a non-existing article from db in ArticlesRenderServerSide", err)
+			return cfg.Render(c, views.NotFound("server-1"), templ.WithStatus(fiber.StatusNotFound))
 		}
 
 		log.Println("Error trying to get an article by slug in ArticlesCreate: ", err)
